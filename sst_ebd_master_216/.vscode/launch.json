@@ -1,0 +1,56 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "(gdb) 启动",
+//             "type": "cppdbg",
+//             "request": "launch",
+//             "program": "输入程序名称，例如 ${workspaceFolder}/a.exe",
+//             "args": [],
+//             "stopAtEntry": false,
+//             "cwd": "${fileDirname}",
+//             "environment": [],
+//             "externalConsole": false,
+//             "MIMode": "gdb",
+//             "miDebuggerPath": "/path/to/gdb",
+//             "setupCommands": [
+//                 {
+//                     "description": "为 gdb 启用整齐打印",
+//                     "text": "-enable-pretty-printing",
+//                     "ignoreFailures": true
+//                 }
+//             ]
+//         }
+//     ]
+// }
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "./sst_ebd/output/bin/robot_control/robot_control.elf",
+            // "executable": "./sst_ebd/output/bin/unit_test/unit_test.elf",
+            // "executable": "./sst_ebd/output/bin/unit_test_os/unit_test_os.elf",
+            // "executable": "./sst_ebd/output/bin/sigboard_control/sigboard_control.elf",
+            // "executable": "./sst_ebd/output/bin/vascular_intervention/vascular_intervention.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "STM32F429ZG", //使用J-link GDB Server时必须；其他GBD Server时可选（有可能帮助自动选择SVD文件）。支持的设备见 https://www.segger.com/downloads/supported-devices.php
+            "svdFile": "./sst_ebd/STM32F429.svd", //svd文件，有这个文件才能查看寄存器的值，每个单片机都不同。可以在以下地址找到 https://github.com/posborne/cmsis-svd
+            "servertype": "openocd", //使用的GDB Server
+            "configFiles": [
+                "${workspaceRoot}/sst_ebd/openocd.cfg"
+            ],
+            //"preLaunchTask": "build"
+            //"armToolchainPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.07/bin/"
+        }
+    ]
+}
